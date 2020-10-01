@@ -59,6 +59,12 @@ class _MovieScreenState extends State<MovieScreen> {
 
     return Scaffold(
       backgroundColor: Colors.black,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pop(context),
+        backgroundColor: Colors.grey[850],
+        child: const Icon(Icons.arrow_back_ios_outlined),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: ListView(
         children: [
           Stack(
@@ -97,30 +103,30 @@ class _MovieScreenState extends State<MovieScreen> {
                   ),
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    padding: EdgeInsets.only(left: 20.0),
-                    onPressed: () => Navigator.pop(context),
-                    icon: Icon(Icons.arrow_back_ios_outlined),
-                    iconSize: 30.0,
-                    color: Colors.black,
-                  ),
-                  Expanded(
-                    child: Image(
-                      image: AssetImage('assets/images/netflix_logo1.png'),
-                      height: 40.0,
-                    ),
-                  ),
-                  IconButton(
-                    padding: EdgeInsets.only(right: 20.0),
-                    onPressed: () => print('Add to Favorites'),
-                    icon: Icon(Icons.favorite_border),
-                    iconSize: 30.0,
-                    color: Colors.black,
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: <Widget>[
+              //     IconButton(
+              //       padding: EdgeInsets.only(left: 20.0),
+              //       onPressed: () => Navigator.pop(context),
+              //       icon: Icon(Icons.arrow_back_ios_outlined),
+              //       iconSize: 30.0,
+              //       color: Colors.black,
+              //     ),
+              //     Expanded(
+              //       child: Image(
+              //         image: AssetImage('assets/images/netflix_logo1.png'),
+              //         height: 40.0,
+              //       ),
+              //     ),
+              //     IconButton(
+              //       padding: EdgeInsets.only(right: 20.0),
+              //       onPressed: () => print('Add to Favorites'),
+              //       icon: Icon(Icons.favorite_border),
+              //       iconSize: 30.0,
+              //       color: Colors.black,
+              //     ),
+              //   ],
+              // ),
               Positioned.fill(
                 bottom: 10.0,
                 child: Align(
@@ -139,29 +145,29 @@ class _MovieScreenState extends State<MovieScreen> {
                   ),
                 ),
               ),
-              // Positioned(
-              //   bottom: 0.0,
-              //   left: 25.0,
-              //   child: IconButton(
-              //     onPressed: () => print('Add to My List'),
-              //     icon: Icon(Icons.add),
-              //     iconSize: 40.0,
-              //     color: Colors.white,
-              //   ),
-              // ),
-              // Positioned(
-              //   bottom: 0.0,
-              //   right: 25.0,
-              //   child: IconButton(
-              //     onPressed: () => print('Share'),
-              //     icon: Icon(Icons.share),
-              //     iconSize: 35.0,
-              //     color: Colors.white,
-              //   ),
-              // ),
+              Positioned(
+                bottom: 0.0,
+                left: 25.0,
+                child: IconButton(
+                  onPressed: () => print('Add to Favorites'),
+                  icon: Icon(Icons.favorite_border),
+                  iconSize: 40.0,
+                  color: Colors.white,
+                ),
+              ),
+              Positioned(
+                bottom: 0.0,
+                right: 25.0,
+                child: IconButton(
+                  onPressed: () => print('Share'),
+                  icon: Icon(Icons.share),
+                  iconSize: 35.0,
+                  color: Colors.white,
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 28.0),
+          const SizedBox(height: 50.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
