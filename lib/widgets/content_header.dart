@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive/models/models.dart';
+import 'package:flutter_netflix_responsive/screens/screens.dart';
 import 'package:video_player/video_player.dart';
 
 import 'widgets.dart';
@@ -60,9 +61,16 @@ class _ContentHeaderMobile extends StatelessWidget {
       children: [
         Container(
           height: 500.0,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(featuredContent.imageUrl),
+          // decoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage(featuredContent.imageUrl),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          child: Hero(
+            tag: featuredContent.imageUrl,
+            child: Image.asset(
+              featuredContent.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
@@ -102,7 +110,15 @@ class _ContentHeaderMobile extends StatelessWidget {
               VerticalIconButton(
                 icon: Icons.info_outline,
                 title: 'Info',
-                onTap: () => print('Info'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          MovieScreen(movie: featuredContent),
+                    ),
+                  );
+                },
               ),
             ],
           ),

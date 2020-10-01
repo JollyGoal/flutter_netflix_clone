@@ -24,6 +24,7 @@ class Previews extends StatelessWidget {
               color: Colors.white,
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
+              letterSpacing: 1.0,
             ),
           ),
         ),

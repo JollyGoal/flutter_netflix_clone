@@ -29,6 +29,7 @@ class ContentList extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
+                letterSpacing: 1.0,
               ),
             ),
           ),
@@ -44,33 +45,35 @@ class ContentList extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 final Content content = contentList[index];
                 return GestureDetector(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (BuildContext context) =>
-                  //           MovieScreen(movie: content),
-                  //     ),
-                  //   );
-                  // },
-                  onTap: () => print(content.imageUrl),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            MovieScreen(movie: content, index: index),
+                      ),
+                    );
+                  },
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8.0),
                     height: isOriginals ? 400.0 : 200.0,
                     width: isOriginals ? 260.0 : 130.0,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(content.imageUrl),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    // child: Hero(
-                    //   tag: content.imageUrl,
-                    //   child: Image.asset(
-                    //     content.imageUrl,
+                    // decoration: BoxDecoration(
+                    //   image: DecorationImage(
+                    //     image: AssetImage(content.imageUrl),
                     //     fit: BoxFit.cover,
                     //   ),
                     // ),
+                    child: Hero(
+                      tag: '$index-${content.imageUrl}',
+                      // child: ClipRRect(
+                      //   borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          content.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      // ),
+                    ),
                   ),
                 );
               },
