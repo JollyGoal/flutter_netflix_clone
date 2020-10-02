@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive/models/models.dart';
+import 'package:flutter_netflix_responsive/data/models/all_models.dart';
 import 'package:flutter_netflix_responsive/screens/screens.dart';
 import 'package:video_player/video_player.dart';
 

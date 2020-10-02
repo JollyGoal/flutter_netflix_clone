@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive/cubits/cubits.dart';
+import 'package:flutter_netflix_responsive/cubits/tmdb_api/tmdb_api_cubit.dart';
 import 'package:flutter_netflix_responsive/data/data.dart';
+import 'package:flutter_netflix_responsive/data/models/all_models.dart';
+import 'package:flutter_netflix_responsive/data/network/themoviedb_api.dart';
 import 'package:flutter_netflix_responsive/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ContentHeader(featuredContent: sintelContent),
           ),
           SliverPadding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
             sliver: SliverToBoxAdapter(
               child: Previews(
                 key: PageStorageKey('previews'),
@@ -64,32 +67,109 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SliverToBoxAdapter(
-            child: ContentList(
-              key: PageStorageKey('myList'),
-              title: 'My List',
-              contentList: myList,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: ContentList(
-              key: PageStorageKey('originals'),
-              title: 'Netflix Originals',
-              contentList: originals,
-              isOriginals: true,
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            sliver: SliverToBoxAdapter(
-              child: ContentList(
-                key: PageStorageKey('trending'),
-                title: 'Trending',
-                contentList: trending,
+            child: BlocProvider<TmdbApiCubit>(
+              create: (_) => TmdbApiCubit(TheMovieDBRepository()),
+              child: BlocBuilder<TmdbApiCubit, TmdbApiState>(
+                // listener: (context, state) {
+                //   if (state is TmdbApiError) {
+                //     Scaffold.of(context)
+                //         .showSnackBar(SnackBar(content: Text(state.message)));
+                //   }
+                // },
+                builder: (context, state) {
+                  final title = "Trending Today";
+                  final storageKey = "trendDay";
+                  final Function invoker = () => context
+                      .bloc<TmdbApiCubit>()
+                      .getTrendingData('day', 'all');
+
+                  if (state is TmdbApiInitial) {
+                    invoker();
+                    return buildLoading(title);
+                  } else if (state is TmdbApiLoading) {
+                    return buildLoading(title);
+                  } else if (state is TmdbApiLoaded) {
+                    return buildDataList(state.instance, storageKey, title);
+                  } else {
+                    if (state is TmdbApiError) {
+                      return ContentListError(
+                        title: title,
+                        tryAgain: invoker,
+                        errorText: state.message,
+                      );
+                    } else {
+                      return ContentListError(
+                        title: title,
+                        tryAgain: invoker,
+                      );
+                    }
+                  }
+                },
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: BlocProvider<TmdbApiCubit>(
+              create: (_) => TmdbApiCubit(TheMovieDBRepository()),
+              child: BlocBuilder<TmdbApiCubit, TmdbApiState>(
+                // listener: (context, state) {
+                //   if (state is TmdbApiError) {
+                //     Scaffold.of(context)
+                //         .showSnackBar(SnackBar(content: Text(state.message)));
+                //   }
+                // },
+                builder: (context, state) {
+                  return ContentListBuilder(
+                    storageKey: "trendWeek",
+                    title: "Trends Of the Week",
+                    invoker: () => context
+                        .bloc<TmdbApiCubit>()
+                        .getTrendingData('week', 'all'),
+                    state: state,
+                  );
+                },
+              ),
+            ),
+          ),
+          // SliverToBoxAdapter(
+          //   child: ContentList(
+          //     key: PageStorageKey('myList'),
+          //     title: 'My List',
+          //     contentList: myList,
+          //   ),
+          // ),
+          // SliverToBoxAdapter(
+          //   child: ContentList(
+          //     key: PageStorageKey('originals'),
+          //     title: 'Originals',
+          //     contentList: originals,
+          //     isOriginals: true,
+          //   ),
+          // ),
+          // SliverPadding(
+          //   padding: const EdgeInsets.only(bottom: 20.0),
+          //   sliver: SliverToBoxAdapter(
+          //     child: ContentList(
+          //       key: PageStorageKey('trending'),
+          //       title: 'Trending',
+          //       contentList: trending,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
+  }
+
+  ContentList buildDataList(List<Content> data, String key, String title) {
+    return ContentList(
+      key: PageStorageKey(key),
+      title: title,
+      contentList: data,
+    );
+  }
+
+  ContentListLoading buildLoading(String title) {
+    return ContentListLoading(title: title);
   }
 }

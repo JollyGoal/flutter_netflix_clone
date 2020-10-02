@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive/models/models.dart';
+import 'package:flutter_netflix_responsive/data/models/all_models.dart';
 
 class Previews extends StatelessWidget {
   final String title;

@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive/models/models.dart';
+import 'package:flutter_netflix_responsive/data/models/all_models.dart';
 import 'package:flutter_netflix_responsive/screens/screens.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ContentList extends StatelessWidget {
   final String title;
@@ -64,14 +66,33 @@ class ContentList extends StatelessWidget {
                     //     fit: BoxFit.cover,
                     //   ),
                     // ),
+                    // child: Hero(
+                    //   tag: '$index-${content.imageUrl}',
+                    //   // child: ClipRRect(
+                    //   //   borderRadius: BorderRadius.circular(8.0),
+                    //     child: Image.asset(
+                    //       content.imageUrl,
+                    //       fit: BoxFit.cover,
+                    //     ),
+                    //   // ),
+                    // ),
                     child: Hero(
-                      tag: '$index-${content.imageUrl}',
+                      tag: '$index-${content.posterPath}',
                       // child: ClipRRect(
                       //   borderRadius: BorderRadius.circular(8.0),
-                        child: Image.asset(
-                          content.imageUrl,
-                          fit: BoxFit.cover,
+                      child: CachedNetworkImage(
+                        imageUrl: "${content.posterPath}",
+                        placeholder: (context, url) => SpinKitFadingCircle(
+                          color: Colors.white,
+                          size: 50.0,
                         ),
+                        errorWidget: (context, url, error) => Icon(
+                          Icons.error_outline,
+                          color: Colors.white,
+                          size: 50.0,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
                       // ),
                     ),
                   ),

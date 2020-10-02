@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive/models/models.dart';
+import 'package:flutter_netflix_responsive/data/models/all_models.dart';
 
 class CircularContentScroll extends StatelessWidget {
   final List<Cast> castList;
@@ -66,7 +66,7 @@ class _ScrollElement extends StatelessWidget {
           CircleAvatar(
             radius: 36.0,
             backgroundColor: Colors.grey,
-            backgroundImage: Image.network(cast.profile_path).image,
+            backgroundImage: Image.network(cast.profilePath).image,
           ),
           const SizedBox(height: 6.0),
           Text(

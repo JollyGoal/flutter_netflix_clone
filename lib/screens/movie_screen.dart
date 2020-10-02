@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive/data/data.dart';
-import 'package:flutter_netflix_responsive/models/content_model.dart';
-import 'package:flutter_netflix_responsive/models/models.dart';
+import 'package:flutter_netflix_responsive/data/models/content_model.dart';
+import 'package:flutter_netflix_responsive/data/models/all_models.dart';
 import 'package:flutter_netflix_responsive/widgets/widgets.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -34,21 +34,21 @@ class _MovieScreenState extends State<MovieScreen> {
       id: 1,
       character: 'Bill S. Preston',
       name: 'Alex Winter',
-      profile_path:
+      profilePath:
           'https://image.tmdb.org/t/p/w600_and_h900_bestv2/3kZFRlc8zvfvziJIc7HxY803HXi.jpg',
     ),
     Cast(
       id: 2,
       character: 'Kelly',
       name: 'Kristen Schaal',
-      profile_path:
+      profilePath:
           'https://image.tmdb.org/t/p/w600_and_h900_bestv2/s3LSHVTx8gxHP2twYsXEGa8JbLl.jpg',
     ),
     Cast(
       id: 3,
       character: 'Thea Preston',
       name: 'Samara Weaving',
-      profile_path:
+      profilePath:
           'https://image.tmdb.org/t/p/w600_and_h900_bestv2/5MzsIWtOKnTRYQ8fBpFCDgwMqNF.jpg',
     ),
   ];
