@@ -13,10 +13,16 @@ class TmdbApiLoading extends TmdbApiState {
   const TmdbApiLoading();
 }
 
-class TmdbApiLoaded extends TmdbApiState {
+class TmdbApiListLoaded extends TmdbApiState {
   final List<Content> instance;
 
-  const TmdbApiLoaded(this.instance);
+  const TmdbApiListLoaded(this.instance);
+}
+
+class TmdbApiContentLoaded extends TmdbApiState {
+  final Content instance;
+
+  const TmdbApiContentLoaded(this.instance);
 }
 
 class TmdbApiError extends TmdbApiState {

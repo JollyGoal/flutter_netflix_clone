@@ -50,7 +50,7 @@ class Previews extends StatelessWidget {
                       width: 130.0,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(content.imageUrl),
+                          image: AssetImage(content.posterPath),
                           fit: BoxFit.cover,
                         ),
                         shape: BoxShape.circle,

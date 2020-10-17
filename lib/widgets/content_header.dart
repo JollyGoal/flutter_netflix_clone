@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive/data/models/all_models.dart';
 import 'package:flutter_netflix_responsive/screens/screens.dart';
+import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 
 import 'widgets.dart';
@@ -56,11 +57,13 @@ class _ContentHeaderMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uuid = Uuid().v1();
     return Stack(
       alignment: Alignment.center,
       children: [
         Container(
           height: 500.0,
+          width: double.infinity,
           // decoration: BoxDecoration(
           //   image: DecorationImage(
           //     image: AssetImage(featuredContent.imageUrl),
@@ -68,9 +71,9 @@ class _ContentHeaderMobile extends StatelessWidget {
           //   ),
           // ),
           child: Hero(
-            tag: featuredContent.imageUrl,
+            tag: '$uuid',
             child: Image.asset(
-              featuredContent.imageUrl,
+              featuredContent.posterPath,
               fit: BoxFit.cover,
             ),
           ),
@@ -115,7 +118,7 @@ class _ContentHeaderMobile extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          MovieScreen(movie: featuredContent),
+                          MovieScreen(movie: featuredContent, uuid: uuid),
                     ),
                   );
                 },
@@ -176,7 +179,7 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
             child: _videoPlayerController.value.initialized
                 ? VideoPlayer(_videoPlayerController)
                 : Image.asset(
-                    widget.featuredContent.imageUrl,
+                    widget.featuredContent.posterPath,
                     fit: BoxFit.cover,
                   ),
           ),
@@ -212,7 +215,7 @@ class __ContentHeaderDesktopState extends State<_ContentHeaderDesktop> {
                 ),
                 const SizedBox(height: 15.0),
                 Text(
-                  widget.featuredContent.description,
+                  widget.featuredContent.overview,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,

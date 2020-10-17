@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive/data/models/all_models.dart';
 import 'package:flutter_netflix_responsive/screens/screens.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:uuid/uuid.dart';
 
 class ContentList extends StatelessWidget {
   final String title;
@@ -46,38 +47,26 @@ class ContentList extends StatelessWidget {
               itemCount: contentList.length,
               itemBuilder: (BuildContext context, int index) {
                 final Content content = contentList[index];
+                final uuid = Uuid().v1();
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            MovieScreen(movie: content, index: index),
-                      ),
-                    );
+                    content.mediaType == 'movie'
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  MovieScreen(movie: content, uuid: uuid),
+                            ),
+                          )
+                        : print('not a movie');
+                    // TODO TV Show Screen
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8.0),
                     height: isOriginals ? 400.0 : 200.0,
                     width: isOriginals ? 260.0 : 130.0,
-                    // decoration: BoxDecoration(
-                    //   image: DecorationImage(
-                    //     image: AssetImage(content.imageUrl),
-                    //     fit: BoxFit.cover,
-                    //   ),
-                    // ),
-                    // child: Hero(
-                    //   tag: '$index-${content.imageUrl}',
-                    //   // child: ClipRRect(
-                    //   //   borderRadius: BorderRadius.circular(8.0),
-                    //     child: Image.asset(
-                    //       content.imageUrl,
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   // ),
-                    // ),
                     child: Hero(
-                      tag: '$index-${content.posterPath}',
+                      tag: '$uuid',
                       // child: ClipRRect(
                       //   borderRadius: BorderRadius.circular(8.0),
                       child: CachedNetworkImage(

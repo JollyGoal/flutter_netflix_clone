@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive/cubits/cubits.dart';
+import 'package:flutter_netflix_responsive/cubits/app_bar/app_bar_cubit.dart';
 import 'package:flutter_netflix_responsive/cubits/tmdb_api/tmdb_api_cubit.dart';
 import 'package:flutter_netflix_responsive/data/data.dart';
 import 'package:flutter_netflix_responsive/data/models/all_models.dart';
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return buildLoading(title);
                   } else if (state is TmdbApiLoading) {
                     return buildLoading(title);
-                  } else if (state is TmdbApiLoaded) {
+                  } else if (state is TmdbApiListLoaded) {
                     return buildDataList(state.instance, storageKey, title);
                   } else {
                     if (state is TmdbApiError) {

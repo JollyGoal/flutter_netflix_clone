@@ -24,8 +24,10 @@ class ContentListBuilder extends StatelessWidget {
       return buildLoading();
     } else if (state is TmdbApiLoading) {
       return buildLoading();
-    } else if (state is TmdbApiLoaded) {
-      return buildDataList(state.instance);
+    } else if (state is TmdbApiListLoaded) {
+      return (state.instance.length > 0)
+          ? buildDataList(state.instance)
+          : SizedBox.shrink();
     } else {
       if (state is TmdbApiError) {
         return ContentListError(
