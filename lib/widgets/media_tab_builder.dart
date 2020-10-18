@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_netflix_responsive/config/constants.dart';
+import 'package:flutter_netflix_responsive/config/palette.dart';
+import 'package:flutter_netflix_responsive/config/utils.dart';
 import 'package:flutter_netflix_responsive/cubits/tmdb_api/tmdb_api_cubit.dart';
-import 'package:flutter_netflix_responsive/data/models/all_models.dart';
+import 'package:flutter_netflix_responsive/data/models/models.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MediaTabBarBuilder extends StatelessWidget {
   final dynamic state;
@@ -37,7 +39,7 @@ class MediaTabBarBuilder extends StatelessWidget {
         width: 80.0,
         child: CircularProgressIndicator(
           strokeWidth: 8.0,
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+          valueColor: AlwaysStoppedAnimation<Color>(Palette.fontPrimary),
         ),
       )),
     );
@@ -61,18 +63,18 @@ class MediaTabBarBuilder extends StatelessWidget {
                 TabBar(
                   indicator: UnderlineTabIndicator(
                     borderSide: BorderSide(
-                      color: Colors.white,
+                      color: Palette.fontPrimary,
                       width: 4.0,
                     ),
                     insets: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   ),
                   indicatorWeight: 8.0,
-                  labelColor: Colors.white,
+                  labelColor: Palette.fontPrimary,
                   labelStyle: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
-                  unselectedLabelColor: Colors.grey,
+                  unselectedLabelColor: Palette.fontSecondary,
                   tabs: [
                     Tab(
                       text: "Videos",
@@ -113,7 +115,7 @@ class MediaTabBarBuilder extends StatelessWidget {
       child: Text(
         'No media to show.',
         style: const TextStyle(
-          color: Colors.grey,
+          color: Palette.fontSecondary,
           fontSize: 20.0,
         ),
       ),
@@ -147,7 +149,7 @@ class _YTVideosScroll extends StatelessWidget {
                   placeholder: (context, url) => SizedBox(
                     width: 160.0,
                     child: SpinKitFadingCircle(
-                      color: Colors.white,
+                      color: Palette.fontPrimary,
                       size: 72.0,
                     ),
                   ),
@@ -155,7 +157,7 @@ class _YTVideosScroll extends StatelessWidget {
                     width: 160.0,
                     child: Icon(
                       Icons.error_outline,
-                      color: Colors.white,
+                      color: Palette.fontPrimary,
                       size: 72.0,
                     ),
                   ),
@@ -164,16 +166,18 @@ class _YTVideosScroll extends StatelessWidget {
               ),
               Center(
                 child: RawMaterialButton(
-                  onPressed: () =>
-                      launchYouTubeVideo(context, videosList[index].key),
+                  onPressed: () => launchUrl(
+                    context,
+                    '$youTubeBaseURl${videosList[index].key}',
+                  ),
                   shape: CircleBorder(),
                   padding: EdgeInsets.all(10.0),
                   elevation: 12.0,
-                  fillColor: Colors.grey[850],
+                  fillColor: Palette.nightBackgroundLight,
                   child: Icon(
                     Icons.play_arrow,
                     size: 50.0,
-                    color: Colors.red[900],
+                    color: Palette.primaryRed,
                   ),
                 ),
               ),
@@ -182,19 +186,6 @@ class _YTVideosScroll extends StatelessWidget {
         );
       },
     );
-  }
-
-  void launchYouTubeVideo(context, String key) async {
-    final url = 'https://www.youtube.com/watch?v=$key';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Cannot launch URL'),
-        ),
-      );
-    }
   }
 }
 
@@ -225,7 +216,7 @@ class _ImagesScroll extends StatelessWidget {
               placeholder: (context, url) => SizedBox(
                 width: 160.0,
                 child: SpinKitFadingCircle(
-                  color: Colors.white,
+                  color: Palette.fontPrimary,
                   size: 72.0,
                 ),
               ),
@@ -233,7 +224,7 @@ class _ImagesScroll extends StatelessWidget {
                 width: 160.0,
                 child: Icon(
                   Icons.error_outline,
-                  color: Colors.white,
+                  color: Palette.fontPrimary,
                   size: 72.0,
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_netflix_responsive/data/models/all_models.dart';
+import 'package:flutter_netflix_responsive/config/constants.dart';
+import 'package:flutter_netflix_responsive/data/models/models.dart';
 
 class Content {
   final Color color;
@@ -22,14 +23,14 @@ class Content {
   final List<String> backdropsList;
   final List<String> postersList;
   final Collection collection;
-
-  final String imdbId;
   final int voteCount;
   final double voteAverage;
   final int budget;
   final int revenue;
   final String status;
   final String homepage;
+
+  final String imdbId;
   final Season season;
 
   const Content({
@@ -52,13 +53,13 @@ class Content {
     this.backdropsList,
     this.postersList,
     this.collection,
-
     this.voteCount,
     this.voteAverage,
     this.budget,
     this.revenue,
     this.status,
     this.homepage,
+
     this.imdbId,
     this.season,
   });
@@ -85,6 +86,8 @@ class Content {
       mediaType: json['media_type'] as String ?? mediaType,
       releaseDate: json['release_date'] ?? json['first_air_date'],
       overview: json['overview'] as String,
+      voteAverage: json['vote_average'] as double,
+      voteCount: json['vote_count'] as int,
     );
   }
 

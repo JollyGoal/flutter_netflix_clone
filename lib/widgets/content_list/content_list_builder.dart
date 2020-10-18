@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive/cubits/tmdb_api/tmdb_api_cubit.dart';
-import 'package:flutter_netflix_responsive/data/models/all_models.dart';
+import 'package:flutter_netflix_responsive/data/models/models.dart';
 import 'package:flutter_netflix_responsive/widgets/widgets.dart';
 
 class ContentListBuilder extends StatelessWidget {

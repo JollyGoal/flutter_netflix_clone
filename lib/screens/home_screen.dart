@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_netflix_responsive/cubits/app_bar/app_bar_cubit.dart';
 import 'package:flutter_netflix_responsive/cubits/tmdb_api/tmdb_api_cubit.dart';
 import 'package:flutter_netflix_responsive/data/data.dart';
-import 'package:flutter_netflix_responsive/data/models/all_models.dart';
+import 'package:flutter_netflix_responsive/data/models/models.dart';
 import 'package:flutter_netflix_responsive/data/network/themoviedb_api.dart';
 import 'package:flutter_netflix_responsive/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

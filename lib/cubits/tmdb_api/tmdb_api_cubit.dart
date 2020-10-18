@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_netflix_responsive/data/models/all_models.dart';
+import 'package:flutter_netflix_responsive/data/models/models.dart';
 import 'package:flutter_netflix_responsive/data/network/themoviedb_api.dart';
 import 'package:meta/meta.dart';
 

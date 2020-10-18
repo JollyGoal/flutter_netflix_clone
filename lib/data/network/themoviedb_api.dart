@@ -1,4 +1,5 @@
-import 'package:flutter_netflix_responsive/data/models/all_models.dart';
+import 'package:flutter_netflix_responsive/config/constants.dart';
+import 'package:flutter_netflix_responsive/data/models/models.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -73,10 +74,7 @@ class TheMovieDBRepository implements TheMovieDBApi {
         runtime: parsed['runtime'] as int ?? 90,
         overview: parsed['overview'],
         releaseDate: parsed['release_date'] ?? parsed['first_air_date'],
-        status: parsed['status'] as String,
         tagLine: parsed['tagline'] as String,
-        voteAverage: parsed['vote_average'] as double,
-        voteCount: parsed['vote_count'] as int,
         genresList: (parsed['genres'].cast<Map<String, dynamic>>())
             .map<Genre>((json) => Genre.fromJson(json))
             .toList(),
@@ -99,6 +97,12 @@ class TheMovieDBRepository implements TheMovieDBApi {
             ? Collection.fromJson(
                 parsed['belongs_to_collection'] as dynamic)
             : null,
+        voteAverage: parsed['vote_average'] as double,
+        voteCount: parsed['vote_count'] as int,
+        budget: parsed['budget'] as int ?? 0,
+        revenue: parsed['revenue'] as int ?? 0,
+        status: parsed['status'] as String ?? '',
+        homepage: parsed['homepage'] as String ?? '',
       );
 
       res.videos.removeWhere((element) => element == null);

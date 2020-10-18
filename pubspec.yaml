@@ -36,6 +36,7 @@ dependencies:
   url_launcher: ^5.7.5
   share: ^0.6.5+3
   palette_generator: ^0.2.3
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

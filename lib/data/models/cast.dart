@@ -1,6 +1,5 @@
+import 'package:flutter_netflix_responsive/config/constants.dart';
 import 'package:meta/meta.dart';
-
-import 'all_models.dart';
 
 class Cast {
   final int id;

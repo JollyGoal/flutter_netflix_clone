@@ -1,4 +1,4 @@
-import 'all_models.dart';
+import 'package:flutter_netflix_responsive/config/constants.dart';
 
 class Collection {
   final int id;

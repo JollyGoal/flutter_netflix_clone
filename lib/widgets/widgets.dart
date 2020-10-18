@@ -14,3 +14,4 @@ export 'content_list/content_list_builder.dart';
 export 'circular_content_scroll/circular_content_scroll.dart';
 export 'circular_content_scroll/circular_content_scroll_loading.dart';
 export 'media_tab_builder.dart';
+export 'votes_section.dart';
